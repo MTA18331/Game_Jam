@@ -19,6 +19,12 @@ public class PlayerMovement : MonoBehaviour
     Text scoretext;
     Image[] scoremeter = new Image[6];
     Boolean canInteract = false;
+    public KeyCode up;
+    public KeyCode down;
+    public KeyCode left;
+    public KeyCode rigth;
+    public String axisUp;
+    public String axisSides;
     void Start()
     {
         score = gameObject.transform.GetChild(1).GetChild(0).gameObject;
@@ -44,8 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Movement.x = Input.GetAxisRaw("Horizontal");
-        Movement.y = Input.GetAxisRaw("Vertical");
+        Movement.x = Input.GetAxisRaw(axisSides);
+        Movement.y = Input.GetAxisRaw(axisUp);
 
         if (animator != null)
         {
@@ -63,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
                 canvas.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option1points;
                 canInteract = false;
+                
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -134,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
         option2.text = CurrentSit.option2;
 
-        option3.text = CurrentSit.option2;
+        option3.text = CurrentSit.option3;
     }
 
     void UpdateScores()
