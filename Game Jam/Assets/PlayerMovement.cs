@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         score = gameObject.transform.GetChild(1).GetChild(0).gameObject;
         canvas = gameObject.transform.GetChild(0).gameObject;
         rb = GetComponent<Rigidbody2D>();
-        scoretext = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        scoretext = score.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
         try
         {
             animator = GetComponent<Animator>();
@@ -39,11 +39,12 @@ public class PlayerMovement : MonoBehaviour
         {
             print("no animator yet");
         }
-
-        for (int i = 0; i < score.gameObject.transform.childCount-1; i++)
+        int k = 0;
+        for (int i = 2; i < score.gameObject.transform.childCount; i++)
         {
             
-            scoremeter[i] = score.gameObject.transform.GetChild(i+1).gameObject.GetComponent<Image>();
+            scoremeter[k] = score.gameObject.transform.GetChild(i).gameObject.GetComponent<Image>();
+            k++;
         }
     
     }
@@ -69,7 +70,9 @@ public class PlayerMovement : MonoBehaviour
                 canvas.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option1points;
                 canInteract = false;
-                
+                Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+                flyingText.text = CurrentSit.option1points.ToString();
+                flyingText.gameObject.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -77,6 +80,9 @@ public class PlayerMovement : MonoBehaviour
                 canvas.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option2points;
                 canInteract = false;
+                Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+                flyingText.text = CurrentSit.option2points.ToString();
+                flyingText.gameObject.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
@@ -84,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
                 canvas.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option3points;
                 canInteract = false;
+                Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+                flyingText.text = CurrentSit.option3points.ToString();
+                flyingText.gameObject.SetActive(true);
 
             }
         }
