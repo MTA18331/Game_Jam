@@ -13,12 +13,18 @@ public class PlayerMovement : MonoBehaviour
     public int points;
     public GameObject score;
     situation CurrentSit;
-
+    Text option1;
+    Text option2;
+    Text option3;
+    Text scoretext;
+    Image[] scoremeter = new Image[6];
+    Boolean canInteract = false;
     void Start()
     {
         score = gameObject.transform.GetChild(1).GetChild(0).gameObject;
         canvas = gameObject.transform.GetChild(0).gameObject;
         rb = GetComponent<Rigidbody2D>();
+        scoretext = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         try
         {
             animator = GetComponent<Animator>();
@@ -27,6 +33,13 @@ public class PlayerMovement : MonoBehaviour
         {
             print("no animator yet");
         }
+
+        for (int i = 0; i < score.gameObject.transform.childCount-1; i++)
+        {
+            
+            scoremeter[i] = score.gameObject.transform.GetChild(i+1).gameObject.GetComponent<Image>();
+        }
+    
     }
 
     private void Update()
@@ -42,6 +55,31 @@ public class PlayerMovement : MonoBehaviour
         }
 
         UpdateScores();
+
+        if (canInteract)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                canvas.gameObject.transform.gameObject.SetActive(false);
+                points += CurrentSit.option1points;
+                canInteract = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+
+                canvas.gameObject.transform.gameObject.SetActive(false);
+                points += CurrentSit.option2points;
+                canInteract = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+
+                canvas.gameObject.transform.gameObject.SetActive(false);
+                points += CurrentSit.option3points;
+                canInteract = false;
+
+            }
+        }
     }
 
     void FixedUpdate()
@@ -51,10 +89,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // get situation script from collision
-        // based on situation set options for what to do in situation 
-        CurrentSit = collision.gameObject.GetComponent<situation>();
-        canvas.gameObject.transform.gameObject.SetActive(true);
+        if (collision.gameObject.tag != "situation")
+        {
+            return;
+        }
+
+        if (CurrentSit == null || CurrentSit != collision.gameObject.GetComponent<situation>())
+        {
+            CurrentSit = collision.gameObject.GetComponent<situation>();
+            sortOutSit();
+        }
+      
+       canvas.gameObject.transform.gameObject.SetActive(true);
+        canInteract = true; 
 
     }
 
@@ -64,78 +111,65 @@ public class PlayerMovement : MonoBehaviour
         {
             
             canvas.gameObject.transform.gameObject.SetActive(false);
+            canInteract = false;
 
         }
 
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Text tx1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        tx1.text = CurrentSit.option1;
-        Text tx2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
-        tx2.text = CurrentSit.option2;
-        Text tx3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
-        tx3.text = CurrentSit.option2;
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-            canvas.gameObject.transform.gameObject.SetActive(false);
-            points += CurrentSit.option1points;
-            }
-       if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-          
-            canvas.gameObject.transform.gameObject.SetActive(false);
-            points += CurrentSit.option2points;
-        }
-       if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-          
-            canvas.gameObject.transform.gameObject.SetActive(false);
-            points += CurrentSit.option3points;
-
-        }
         
+     
+   
+        
+    }
+
+    void sortOutSit()
+    {
+        option1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        option2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
+        option3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+
+        option1.text = CurrentSit.option1;
+
+        option2.text = CurrentSit.option2;
+
+        option3.text = CurrentSit.option2;
     }
 
     void UpdateScores()
     {
-        Text tx = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        tx.text= points + " points";
+         
+        scoretext.text= points + " points";
 
         if (points > 0)
         {
-           Image im = score.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>();
-            im.color = Color.red;
+          scoremeter[0].color = Color.red;
             
         }
         if (points > 200)
         {
-            Image im = score.gameObject.transform.GetChild(2).gameObject.GetComponent<Image>();
-            im.color = Color.red;
+            scoremeter[1].color = Color.red;
 
         }
         if (points > 400)
         {
-            Image im = score.gameObject.transform.GetChild(3).gameObject.GetComponent<Image>();
-            im.color = Color.red;
+            scoremeter[2].color = Color.red;
 
         }
         if (points > 600)
         {
-            Image im = score.gameObject.transform.GetChild(4).gameObject.GetComponent<Image>();
-            im.color = Color.red;
+            scoremeter[3].color = Color.red;
 
         }
         if (points > 800)
         {
-            Image im = score.gameObject.transform.GetChild(5).gameObject.GetComponent<Image>();
-            im.color = Color.red;
+            scoremeter[4].color = Color.red;
 
         }
         if (points > 1000)
         {
-            Image im = score.gameObject.transform.GetChild(6).gameObject.GetComponent<Image>();
-            im.color = Color.red;
+            scoremeter[5].color = Color.red;
 
         }
     }
