@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
@@ -10,12 +10,21 @@ public class PlayerMovement : MonoBehaviour
     Vector2 Movement;
     public Animator animator;
     public GameObject canvas;
-
+    public int points;
+    public GameObject score;
+    situation CurrentSit;
+    Text option1;
+    Text option2;
+    Text option3;
+    Text scoretext;
+    Image[] scoremeter = new Image[6];
+    Boolean canInteract = false;
     void Start()
     {
-        Debug.Log(gameObject.transform.GetChild(0).gameObject.name);
+        score = gameObject.transform.GetChild(1).GetChild(0).gameObject;
         canvas = gameObject.transform.GetChild(0).gameObject;
         rb = GetComponent<Rigidbody2D>();
+        scoretext = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         try
         {
             animator = GetComponent<Animator>();
@@ -24,6 +33,13 @@ public class PlayerMovement : MonoBehaviour
         {
             print("no animator yet");
         }
+
+        for (int i = 0; i < score.gameObject.transform.childCount-1; i++)
+        {
+            
+            scoremeter[i] = score.gameObject.transform.GetChild(i+1).gameObject.GetComponent<Image>();
+        }
+    
     }
 
     private void Update()
@@ -37,6 +53,33 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Vertical", Movement.y);
             animator.SetFloat("Speed", Movement.sqrMagnitude);
         }
+
+        UpdateScores();
+
+        if (canInteract)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                canvas.gameObject.transform.gameObject.SetActive(false);
+                points += CurrentSit.option1points;
+                canInteract = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+
+                canvas.gameObject.transform.gameObject.SetActive(false);
+                points += CurrentSit.option2points;
+                canInteract = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+
+                canvas.gameObject.transform.gameObject.SetActive(false);
+                points += CurrentSit.option3points;
+                canInteract = false;
+
+            }
+        }
     }
 
     void FixedUpdate()
@@ -46,39 +89,91 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("enter");
-        canvas.gameObject.transform.gameObject.SetActive(true);
+        if (collision.gameObject.tag != "situation")
+        {
+            return;
+        }
+
+        if (CurrentSit == null || CurrentSit != collision.gameObject.GetComponent<situation>())
+        {
+            CurrentSit = collision.gameObject.GetComponent<situation>();
+            sortOutSit();
+        }
+      
+       canvas.gameObject.transform.gameObject.SetActive(true);
+        canInteract = true; 
 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("exit");
+
         {
+            
             canvas.gameObject.transform.gameObject.SetActive(false);
+            canInteract = false;
 
         }
 
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log(Input.GetKeyDown("space"));
-        Debug.Log("stay");
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        
+     
+   
+        
+    }
+
+    void sortOutSit()
+    {
+        option1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        option2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
+        option3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+
+        option1.text = CurrentSit.option1;
+
+        option2.text = CurrentSit.option2;
+
+        option3.text = CurrentSit.option2;
+    }
+
+    void UpdateScores()
+    {
+         
+        scoretext.text= points + " points";
+
+        if (points > 0)
         {
-            print("1 was pressed");
-            canvas.gameObject.transform.gameObject.SetActive(false);
+          scoremeter[0].color = Color.red;
+            
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (points > 200)
         {
-                print("2 was pressed");
-            canvas.gameObject.transform.gameObject.SetActive(false);
+            scoremeter[1].color = Color.red;
+
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (points > 400)
         {
-                print("3 was pressed");
-            canvas.gameObject.transform.gameObject.SetActive(false);
+            scoremeter[2].color = Color.red;
+
+        }
+        if (points > 600)
+        {
+            scoremeter[3].color = Color.red;
+
+        }
+        if (points > 800)
+        {
+            scoremeter[4].color = Color.red;
+
+        }
+        if (points > 1000)
+        {
+            scoremeter[5].color = Color.red;
+
         }
     }
+
+
 }
 
