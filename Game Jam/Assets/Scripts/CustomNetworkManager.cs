@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class MsgTypes
 {
@@ -17,32 +18,10 @@ public class MsgTypes
 
 public class CustomNetworkManager : NetworkManager
 {
-    #region Network Manager Instance
-    private static CustomNetworkManager instance; 
-    public static  CustomNetworkManager networkManager
-    {
-        get
-        {
-            return instance;
-        }
+    public short playerPrefabIndex;
 
-        set
-        {
-            if (instance != null)
-            {
-                instance = value;
-            }
-
-        }
-    }
-    #endregion
-
-    public short playerPrefabIndex; 
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    public int selGridInt = 0;
+    public string[] selStrings = new string[] {"Cube"};
 
     public override void OnStartServer()
     {
@@ -52,15 +31,8 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnClientConnect(NetworkConnection conn)
     {
-        client.RegisterHandler(MsgTypes.PlayerPrefabSelect, OnResponsePrefab);
+        client.RegisterHandler(MsgTypes.PlayerPrefabSelect, OnRequestPrefab);
         base.OnClientConnect(conn);
-    }
-
-    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
-    {
-        MsgTypes.PlayerPrefabMsg msg = new MsgTypes.PlayerPrefabMsg();
-        msg.controllerID = playerControllerId;
-        NetworkServer.SendToClient(conn.connectionId, MsgTypes.PlayerPrefabSelect, msg);
     }
 
     #region Private Request & Response
@@ -80,4 +52,21 @@ public class CustomNetworkManager : NetworkManager
     }
     #endregion
 
+    void OnGUI()
+    {
+        if (!isNetworkActive)
+        {
+            selGridInt = GUI.SelectionGrid(new Rect(Screen.width - 200, 10, 200, 50), selGridInt, selStrings, 2);
+            playerPrefabIndex = (short)(selGridInt + 1);
+        }
+        
+
+    }
+
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    {
+        MsgTypes.PlayerPrefabMsg msg = new MsgTypes.PlayerPrefabMsg();
+        msg.controllerID = playerControllerId;
+        NetworkServer.SendToClient(conn.connectionId, MsgTypes.PlayerPrefabSelect, msg);
+    }
 }
