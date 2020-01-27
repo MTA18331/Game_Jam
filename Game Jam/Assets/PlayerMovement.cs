@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
@@ -10,10 +10,13 @@ public class PlayerMovement : MonoBehaviour
     Vector2 Movement;
     public Animator animator;
     public GameObject canvas;
+    public int points;
+    public GameObject score;
+    situation CurrentSit;
 
     void Start()
     {
-        Debug.Log(gameObject.transform.GetChild(0).gameObject.name);
+        score = gameObject.transform.GetChild(1).GetChild(0).gameObject;
         canvas = gameObject.transform.GetChild(0).gameObject;
         rb = GetComponent<Rigidbody2D>();
         try
@@ -37,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Vertical", Movement.y);
             animator.SetFloat("Speed", Movement.sqrMagnitude);
         }
+
+        UpdateScores();
     }
 
     void FixedUpdate()
@@ -46,15 +51,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("enter");
+        // get situation script from collision
+        // based on situation set options for what to do in situation 
+        CurrentSit = collision.gameObject.GetComponent<situation>();
         canvas.gameObject.transform.gameObject.SetActive(true);
 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("exit");
+
         {
+            
             canvas.gameObject.transform.gameObject.SetActive(false);
 
         }
@@ -62,23 +70,76 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log(Input.GetKeyDown("space"));
-        Debug.Log("stay");
+        Text tx1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        tx1.text = CurrentSit.option1;
+        Text tx2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
+        tx2.text = CurrentSit.option2;
+        Text tx3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+        tx3.text = CurrentSit.option2;
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            print("1 was pressed");
+            {
             canvas.gameObject.transform.gameObject.SetActive(false);
+            points += CurrentSit.option1points;
+            }
+       if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+          
+            canvas.gameObject.transform.gameObject.SetActive(false);
+            points += CurrentSit.option2points;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-                print("2 was pressed");
+       if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+          
             canvas.gameObject.transform.gameObject.SetActive(false);
+            points += CurrentSit.option3points;
+
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        
+    }
+
+    void UpdateScores()
+    {
+        Text tx = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        tx.text= points + " points";
+
+        if (points > 0)
         {
-                print("3 was pressed");
-            canvas.gameObject.transform.gameObject.SetActive(false);
+           Image im = score.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>();
+            im.color = Color.red;
+            
+        }
+        if (points > 200)
+        {
+            Image im = score.gameObject.transform.GetChild(2).gameObject.GetComponent<Image>();
+            im.color = Color.red;
+
+        }
+        if (points > 400)
+        {
+            Image im = score.gameObject.transform.GetChild(3).gameObject.GetComponent<Image>();
+            im.color = Color.red;
+
+        }
+        if (points > 600)
+        {
+            Image im = score.gameObject.transform.GetChild(4).gameObject.GetComponent<Image>();
+            im.color = Color.red;
+
+        }
+        if (points > 800)
+        {
+            Image im = score.gameObject.transform.GetChild(5).gameObject.GetComponent<Image>();
+            im.color = Color.red;
+
+        }
+        if (points > 1000)
+        {
+            Image im = score.gameObject.transform.GetChild(6).gameObject.GetComponent<Image>();
+            im.color = Color.red;
+
         }
     }
+
+
 }
 
