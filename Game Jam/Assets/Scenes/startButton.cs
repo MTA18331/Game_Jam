@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class startButton : MonoBehaviour
 {
+    public GameObject eat;
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(eating());
     }
 
     // Update is called once per frame
@@ -22,4 +23,11 @@ public class startButton : MonoBehaviour
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    IEnumerator eating()
+    {
+        yield return new WaitForSeconds(3);
+        eat.SetActive(false);
+    }
+
 }
