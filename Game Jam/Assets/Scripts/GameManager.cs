@@ -29,22 +29,39 @@ public class GameManager : MonoBehaviour
         gameManager = this;
     }
 
+    [SerializeField] private float transmissionTime;
+    private float t = 0.0f; // Keeps track of time
+
     private void Start()
     {
-        AudioManager.audioManager.musicSource = AudioManager.audioManager.GetComponent<AudioSource>();
-        AudioManager.audioManager.musicSource2 = AudioManager.audioManager.GetComponent<AudioSource>();
-        AudioManager.audioManager.sfxSource = AudioManager.audioManager.GetComponent<AudioSource>();
         AudioManager.audioManager.firstMusicSourceIsPlaying = true;
-        //AudioManager.audioManager.musicSource.clip = AudioManager.audioManager.ambientSounds[0];
-        AudioManager.audioManager.PlayMusic(AudioManager.audioManager.ambientSounds[Random.Range(0, AudioManager.audioManager.ambientSounds.Length)]);
+        AudioManager.audioManager.PlayMusic(AudioManager.audioManager.ambientSounds[0]);
+        AudioManager.audioManager.musicSource2.clip = AudioManager.audioManager.ambientSounds[1];
+        t = Time.time;
     }
 
     private void Update()
     {
 
-        if (AudioManager.audioManager.musicSource.clip.length < 5)
+        if (Time.time-t >= AudioManager.audioManager.musicSource.clip.length - transmissionTime && AudioManager.audioManager.firstMusicSourceIsPlaying)
         {
-            //AudioManager.audioManager.PlayMusicWithFade(AudioManager.audioManager.);
+            AudioManager.audioManager.PlayMusicWithCrossFade(AudioManager.audioManager.ambientSounds[1], transmissionTime);
+            t = Time.time;
+        } else if (Time.time - t >= AudioManager.audioManager.musicSource2.clip.length - transmissionTime)
+        {
+            AudioManager.audioManager.PlayMusicWithCrossFade(AudioManager.audioManager.ambientSounds[0], transmissionTime);
+            t = Time.time;
+        }
+        
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            AudioManager.audioManager.PlayMusicWithFade(AudioManager.audioManager.ambientSounds[1], transmissionTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AudioManager.audioManager.PlayMusicWithCrossFade(AudioManager.audioManager.ambientSounds[0], transmissionTime);
         }
 
     }
