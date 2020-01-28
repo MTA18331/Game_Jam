@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class church : MonoBehaviour
 {
     public  GameObject cam1;
@@ -10,6 +10,7 @@ public class church : MonoBehaviour
     public GameObject cam4;
     public GameObject P1UI;
     public GameObject P2UI;
+    public GameObject fader;
     // Start is called before the first frame update
 
     void Start()
@@ -35,7 +36,7 @@ public class church : MonoBehaviour
     IEnumerator churchScene()
     {
        
-        yield return new WaitForSeconds(5);
+        //yield return new WaitForSeconds(5);
         cam4.gameObject.SetActive(true);
         cam3.gameObject.SetActive(true);
         cam1.gameObject.SetActive(false);
@@ -43,5 +44,10 @@ public class church : MonoBehaviour
         cam4.gameObject.SetActive(true);
         P1UI.gameObject.SetActive(false);
         P2UI.gameObject.SetActive(false);
+        yield return new WaitForSeconds(17);
+        
+        fader.SetActive(true);
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
