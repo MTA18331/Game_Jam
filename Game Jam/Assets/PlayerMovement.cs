@@ -12,19 +12,20 @@ public class PlayerMovement : MonoBehaviour
     public GameObject canvas;
     public int points;
     public GameObject score;
-    situation CurrentSit;
+    public situation CurrentSit;
     Text option1;
     Text option2;
     Text option3;
     Text scoretext;
     Image[] scoremeter = new Image[6];
     Boolean canInteract = false;
-    public KeyCode up;
-    public KeyCode down;
-    public KeyCode left;
-    public KeyCode rigth;
+    public KeyCode one;
+    public KeyCode two;
+    public KeyCode three;
+   
     public String axisUp;
     public String axisSides;
+    public Boolean confused = false;
     void Start()
     {
         score = gameObject.transform.GetChild(1).GetChild(0).gameObject;
@@ -51,6 +52,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (confused)
+        {
+            return;
+        }
+
         Movement.x = Input.GetAxisRaw(axisSides);
         Movement.y = Input.GetAxisRaw(axisUp);
 
@@ -65,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (canInteract)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(one))
             {
                 canvas.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option1points;
@@ -73,8 +79,16 @@ public class PlayerMovement : MonoBehaviour
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
                 flyingText.text = CurrentSit.option1points.ToString();
                 flyingText.gameObject.SetActive(true);
+
+                if(CurrentSit.gameObject.tag == "player" && option1.text == "hit")
+                {
+                    CurrentSit.playerHit();
+                } else if(CurrentSit.gameObject.tag == "player"){
+                    GetComponent<situation>().playerHit();
+                }
+
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(two))
             {
 
                 canvas.gameObject.transform.gameObject.SetActive(false);
@@ -83,8 +97,17 @@ public class PlayerMovement : MonoBehaviour
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
                 flyingText.text = CurrentSit.option2points.ToString();
                 flyingText.gameObject.SetActive(true);
+
+                if (CurrentSit.gameObject.tag == "player" && option1.text == "hit")
+                {
+                    CurrentSit.playerHit();
+                }
+                else if (CurrentSit.gameObject.tag == "player")
+                {
+                    GetComponent<situation>().playerHit();
+                }
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(three))
             {
 
                 canvas.gameObject.transform.gameObject.SetActive(false);
@@ -93,6 +116,15 @@ public class PlayerMovement : MonoBehaviour
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
                 flyingText.text = CurrentSit.option3points.ToString();
                 flyingText.gameObject.SetActive(true);
+
+                if (CurrentSit.gameObject.tag == "player" && option1.text == "hit")
+                {
+                    CurrentSit.playerHit();
+                }
+                else if (CurrentSit.gameObject.tag == "player")
+                {
+                    GetComponent<situation>().playerHit();
+                }
 
             }
         }
@@ -105,14 +137,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != "situation")
+      
+        if (collision.gameObject.tag != "situation" && collision.gameObject.tag != "player")
         {
+           
             return;
         }
 
-        if (CurrentSit == null || CurrentSit != collision.gameObject.GetComponent<situation>())
+        if (collision.gameObject.tag == "player")
         {
             CurrentSit = collision.gameObject.GetComponent<situation>();
+            playersit();
+            
+        }
+
+        else if ( CurrentSit != collision.gameObject.GetComponent<situation>())
+        {
+            CurrentSit = collision.gameObject.GetComponent<situation>();
+          
             sortOutSit();
         }
       
@@ -140,8 +182,57 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    void playersit()
+    {
+        int r1 = UnityEngine.Random.Range(1, 4);
+        int r2 = UnityEngine.Random.Range(1, 4);
+        while (r2 == r1)
+        {
+            r2 = UnityEngine.Random.Range(1, 4);
+        }
+        int r3 = UnityEngine.Random.Range(1, 4);
+        while (r3 == r1 || r3 == r2)
+        {
+            r3 = UnityEngine.Random.Range(1, 4);
+        }
+        
+
+        option1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        option2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
+        option3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+        option1.text = randomize(r1);
+
+        option2.text = randomize(r2);
+
+        option3.text = randomize(r3);
+        Debug.Log(option1.text);
+        Debug.Log(option2.text);
+        Debug.Log(option3.text);
+    }
+
+    String randomize(int i)
+    {
+        switch (i)
+        {
+            default:
+                return "Error";
+          
+            case 1:
+                return "hit";
+           
+            case 2:
+                return "Fall";
+             
+            case 3:
+                return "Honk";
+               
+
+        }
+    }
+
     void sortOutSit()
     {
+
         option1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         option2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
         option3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class situation : MonoBehaviour
+public class playerSituation1 : MonoBehaviour
 {
     public string sitName;
     public string option1;
@@ -11,27 +11,16 @@ public class situation : MonoBehaviour
     public int option1points;
     public int option2points;
     public int option3points;
-    public GameObject birds;
+    GameObject birds;
     void Start()
     {
-
-      
+        birds = Resources.Load("MovementPrefab/confusedbirds") as GameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void playerHit()
-    {
-        Debug.Log("happened");
-        
         Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-        birds.transform.position = pos;
-        birds.transform.SetParent(this.gameObject.transform);
-        birds.SetActive(true);
-
+        Instantiate(birds, pos, birds.transform.rotation);
     }
 }
