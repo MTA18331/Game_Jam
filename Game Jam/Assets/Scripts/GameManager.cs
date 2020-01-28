@@ -29,8 +29,10 @@ public class GameManager : MonoBehaviour
         gameManager = this;
     }
 
+    #region Audio Properties
     [SerializeField] private float transmissionTime;
     private float t = 0.0f; // Keeps track of time
+    #endregion
 
     private void Start()
     {
@@ -53,16 +55,6 @@ public class GameManager : MonoBehaviour
             t = Time.time;
         }
         
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            AudioManager.audioManager.PlayMusicWithFade(AudioManager.audioManager.ambientSounds[1], transmissionTime);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            AudioManager.audioManager.PlayMusicWithCrossFade(AudioManager.audioManager.ambientSounds[0], transmissionTime);
-        }
 
     }
 
