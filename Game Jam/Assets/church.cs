@@ -17,6 +17,7 @@ public class church : MonoBehaviour
    // public Text p2score;
     public GameObject Sitrespawn;
     // Start is called before the first frame update
+    [SerializeField] private int sfxIndex;
 
     void Start()
     {
@@ -50,8 +51,19 @@ public class church : MonoBehaviour
         P1UI.gameObject.SetActive(false);
        // P2UI.gameObject.SetActive(false);
         AudioManager.audioManager.PauseMusic();
-        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[1]);
-
+        if (sfxIndex == 2)
+        {
+            AudioManager.audioManager.PlaySFXAsMusic(AudioManager.audioManager.sfxSounds[sfxIndex]);
+        } else if(sfxIndex == 1)
+        {
+            StartCoroutine(WaitWhipSound());
+        }
+        else
+        {
+            AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[sfxIndex]);
+        }
+        
+        
 
        
         yield return new WaitForSeconds(17);
@@ -65,6 +77,7 @@ public class church : MonoBehaviour
         sitauationCam.gameObject.SetActive(false);
         situation.gameObject.SetActive(false);
         fader.SetActive(false);
+        AudioManager.audioManager.StopSFX();
         AudioManager.audioManager.UnPauseMusic();
         //buildend();
     }
@@ -104,6 +117,18 @@ public class church : MonoBehaviour
     }
     public void playAgain ()
     {
+
+    }
+
+    private IEnumerator WaitWhipSound()
+    {
+        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[sfxIndex]);
+        yield return new WaitForSeconds(1.2f);
+        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[sfxIndex]);
+        yield return new WaitForSeconds(1.6f);
+        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[sfxIndex]);
+        yield return new WaitForSeconds(1.2f);
+        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[sfxIndex]);
 
     }
 }

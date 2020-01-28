@@ -371,12 +371,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -587,6 +587,7 @@ MonoBehaviour:
   P1UI: {fileID: 1183138974}
   fader: {fileID: 581892722}
   Sitrespawn: {fileID: 799630046}
+  sfxIndex: 0
 --- !u!1 &198875674 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6784565123990319429, guid: c621479a4dba5d247834338146cc8bf8,
@@ -3981,12 +3982,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4330,8 +4331,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bb8f8494736a9b341a33baa07c197e9f, type: 3}
   - {fileID: 8300000, guid: b1ce753fee9ccd941a92764322918c08, type: 3}
   sfxSounds:
-  - {fileID: 8300000, guid: 1c1e9132cc92b5f45b012fae16efabad, type: 3}
   - {fileID: 8300000, guid: 48dd2249b7ee2ca459c373e1f4fc8bf2, type: 3}
+  - {fileID: 8300000, guid: 0bc659760af58be48a630e100aa9f4a0, type: 3}
+  - {fileID: 8300000, guid: a88d2c38093f4e84d8e1a157a86d9367, type: 3}
   firstMusicSourceIsPlaying: 0
 --- !u!4 &1433058718
 Transform:
@@ -4414,12 +4416,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -5100,6 +5102,7 @@ MonoBehaviour:
   P1UI: {fileID: 1183138974}
   fader: {fileID: 200474122}
   Sitrespawn: {fileID: 1880355942}
+  sfxIndex: 1
 --- !u!1 &1845615409
 GameObject:
   m_ObjectHideFlags: 0
@@ -5483,31 +5486,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.09593773
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.8314552
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.021320343
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.5116653
-      objectReference: {fileID: 0}
-    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1786297390533768700, guid: e3279c3ac3ec6cd40b90311a96652cd8,
         type: 3}
       propertyPath: option1
@@ -5527,6 +5505,31 @@ PrefabInstance:
         type: 3}
       propertyPath: sitName
       value: cheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 1786297390533768702, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.09593773
+      objectReference: {fileID: 0}
+    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.8314552
+      objectReference: {fileID: 0}
+    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.021320343
+      objectReference: {fileID: 0}
+    - target: {fileID: 1786297390533768699, guid: e3279c3ac3ec6cd40b90311a96652cd8,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.5116653
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1786297390533768700, guid: e3279c3ac3ec6cd40b90311a96652cd8, type: 3}
@@ -6324,6 +6327,7 @@ MonoBehaviour:
   P1UI: {fileID: 1183138974}
   fader: {fileID: 929888832}
   Sitrespawn: {fileID: 329761038}
+  sfxIndex: 2
 --- !u!1001 &1786297391754011293
 PrefabInstance:
   m_ObjectHideFlags: 0
