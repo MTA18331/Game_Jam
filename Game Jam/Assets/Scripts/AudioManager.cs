@@ -26,13 +26,23 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region AudioSources
-    [Header("Audio Sources")]
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource musicSource2;
-    [SerializeField] private AudioSource sfxSource;
+    [HideInInspector] public AudioSource musicSource;
+    [HideInInspector] public AudioSource musicSource2;
+    [HideInInspector] public AudioSource sfxSource;
+    #endregion
+    
+    #region Ambient audio clips
+    [Header("Ambient sounds Audio Clips")]
+    public AudioClip[] ambientSounds;
     #endregion
 
-    private bool firstMusicSourceIsPlaying;
+    #region SFX audio clips
+    [Header("SFX Audio Clips")]
+    public AudioClip[] sfxSounds;
+    #endregion
+
+    [HideInInspector]
+    public bool firstMusicSourceIsPlaying;
 
     private void Awake()
     {
@@ -40,6 +50,16 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        musicSource = GetComponent<AudioSource>();
+        musicSource2 = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        
+    }
 
     public void PlayMusic(AudioClip musicClip)
     {

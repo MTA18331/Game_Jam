@@ -29,6 +29,24 @@ public class GameManager : MonoBehaviour
         gameManager = this;
     }
 
+    private void Start()
+    {
+        AudioManager.audioManager.musicSource = AudioManager.audioManager.GetComponent<AudioSource>();
+        AudioManager.audioManager.musicSource2 = AudioManager.audioManager.GetComponent<AudioSource>();
+        AudioManager.audioManager.sfxSource = AudioManager.audioManager.GetComponent<AudioSource>();
+        AudioManager.audioManager.firstMusicSourceIsPlaying = true;
+        //AudioManager.audioManager.musicSource.clip = AudioManager.audioManager.ambientSounds[0];
+        AudioManager.audioManager.PlayMusic(AudioManager.audioManager.ambientSounds[Random.Range(0, AudioManager.audioManager.ambientSounds.Length)]);
+    }
 
+    private void Update()
+    {
+
+        if (AudioManager.audioManager.musicSource.clip.length < 5)
+        {
+            //AudioManager.audioManager.PlayMusicWithFade(AudioManager.audioManager.);
+        }
+
+    }
 
 }
