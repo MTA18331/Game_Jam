@@ -53,8 +53,9 @@ public class church : MonoBehaviour
         AudioManager.audioManager.PauseMusic();
         if (sfxIndex == 2)
         {
-            AudioManager.audioManager.PlaySFXAsMusic(AudioManager.audioManager.sfxSounds[sfxIndex]);
-        } else if(sfxIndex == 1)
+            AudioManager.audioManager.PlaySFXAsMusic(AudioManager.audioManager.sfxSounds[sfxIndex]);            
+        }
+        else if(sfxIndex == 1)
         {
             StartCoroutine(WaitWhipSound());
         }

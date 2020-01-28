@@ -128,6 +128,13 @@ public class AudioManager : MonoBehaviour
         sfxSource.Play();
     }
 
+    public void PlaySFXAsMusic(AudioClip clip, float stopTime)
+    {
+        sfxSource.clip = clip;
+        sfxSource.Play();
+        StartCoroutine(StopMusic(sfxSource, stopTime));
+    }
+
     public void StopSFX()
     {
         sfxSource.Stop();
@@ -205,5 +212,9 @@ public class AudioManager : MonoBehaviour
         activeSource.UnPause();
     }
 
-
+    private IEnumerator StopMusic(AudioSource activeSource, float waitTime = 60.0f)
+    {
+        yield return new WaitForSeconds(waitTime);
+        activeSource.Stop();
+    }
 }
