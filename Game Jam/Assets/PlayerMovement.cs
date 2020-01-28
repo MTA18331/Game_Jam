@@ -240,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
     void UpdateScores()
     {
          
-        scoretext.text= points + " points";
+        scoretext.text= points.ToString();
 
         if (points > 0)
         {
