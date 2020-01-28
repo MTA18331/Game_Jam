@@ -41,24 +41,17 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] sfxSounds;
     #endregion
 
-    [HideInInspector]
-    public bool firstMusicSourceIsPlaying;
+    [HideInInspector] public bool firstMusicSourceIsPlaying;
 
     private void Awake()
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
-    }
 
-    private void Start()
-    {
-        musicSource = GetComponent<AudioSource>();
-        musicSource2 = GetComponent<AudioSource>();
-    }
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource2 = gameObject.AddComponent<AudioSource>();
+        sfxSource = gameObject.AddComponent<AudioSource>();
 
-    private void Update()
-    {
-        
     }
 
     public void PlayMusic(AudioClip musicClip)
@@ -150,7 +143,7 @@ public class AudioManager : MonoBehaviour
     private IEnumerator UpdateMusicWithCrossFade(AudioSource original, AudioSource newSource, float transitionTime)
     {
 
-        for (float t = 0.0f; t < transitionTime; t += Time.deltaTime)
+        for (float t = 0.0f; t <= transitionTime; t += Time.deltaTime)
         {
             original.volume = (1 - (t / Time.deltaTime)); // Fades out the current source by lowering the volume.
             newSource.volume = (t / Time.deltaTime); // Fades in the new source by increasing the volume.
