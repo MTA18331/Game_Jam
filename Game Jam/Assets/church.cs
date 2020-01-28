@@ -61,12 +61,10 @@ public class church : MonoBehaviour
         }
         else
         {
+            AudioManager.audioManager.StopSFX();
             AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[sfxIndex]);
         }
         
-        
-
-       
         yield return new WaitForSeconds(17);
         fader.SetActive(true);
         yield return new WaitForSeconds(3);
