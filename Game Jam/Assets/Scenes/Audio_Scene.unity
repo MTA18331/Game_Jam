@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transmissionTime: 5
+  pitch: 0.6
 --- !u!4 &847608485
 Transform:
   m_ObjectHideFlags: 0
@@ -283,12 +284,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bb8f8494736a9b341a33baa07c197e9f, type: 3}
   - {fileID: 8300000, guid: b1ce753fee9ccd941a92764322918c08, type: 3}
   sfxSounds:
-  - {fileID: 8300000, guid: 1c1e9132cc92b5f45b012fae16efabad, type: 3}
-  - {fileID: 8300000, guid: 087637c853bb7bd44867fa409647c2ef, type: 3}
-  - {fileID: 8300000, guid: a88d2c38093f4e84d8e1a157a86d9367, type: 3}
-  - {fileID: 8300000, guid: 5904f38a40a893540b2ada4235c82534, type: 3}
-  - {fileID: 8300000, guid: 07b5f66ca26416f4fa44f5242de7e532, type: 3}
-  - {fileID: 8300000, guid: 0bc659760af58be48a630e100aa9f4a0, type: 3}
+  - {fileID: 8300000, guid: afdca8167dc3e624bb39890e55f16104, type: 3}
   firstMusicSourceIsPlaying: 0
 --- !u!4 &1880582544
 Transform:

@@ -72,8 +72,9 @@ public class PlayerMovement : MonoBehaviour
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
                 flyingText.text = CurrentSit.option1points.ToString();
                 flyingText.gameObject.SetActive(true);
-
-                if(CurrentSit.gameObject.tag == "player" && option1.text == "hit")
+                AudioManager.audioManager.SetPitch(0.6f, AudioManager.audioManager.sfxSource2);
+                AudioManager.audioManager.PlaySFXExtra(AudioManager.audioManager.sfxSounds[0]);
+                if (CurrentSit.gameObject.tag == "player" && option1.text == "hit")
                 {
                     CurrentSit.playerHit();
                 } else if(CurrentSit.gameObject.tag == "player"){
@@ -90,7 +91,8 @@ public class PlayerMovement : MonoBehaviour
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
                 flyingText.text = CurrentSit.option2points.ToString();
                 flyingText.gameObject.SetActive(true);
-
+                AudioManager.audioManager.SetPitch(0.8f, AudioManager.audioManager.sfxSource2);
+                AudioManager.audioManager.PlaySFXExtra(AudioManager.audioManager.sfxSounds[0]);
                 if (CurrentSit.gameObject.tag == "player" && option1.text == "hit")
                 {
                     CurrentSit.playerHit();
@@ -109,7 +111,8 @@ public class PlayerMovement : MonoBehaviour
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
                 flyingText.text = CurrentSit.option3points.ToString();
                 flyingText.gameObject.SetActive(true);
-
+                AudioManager.audioManager.SetPitch(1.0f, AudioManager.audioManager.sfxSource2);
+                AudioManager.audioManager.PlaySFXExtra(AudioManager.audioManager.sfxSounds[0]);
                 if (CurrentSit.gameObject.tag == "player" && option1.text == "hit")
                 {
                     CurrentSit.playerHit();
