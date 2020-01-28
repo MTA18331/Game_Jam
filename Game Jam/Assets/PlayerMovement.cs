@@ -140,7 +140,6 @@ public class PlayerMovement : MonoBehaviour
       
         if (collision.gameObject.tag != "situation" && collision.gameObject.tag != "player")
         {
-           
             return;
         }
 

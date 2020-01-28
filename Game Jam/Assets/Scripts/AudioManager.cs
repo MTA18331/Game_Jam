@@ -41,8 +41,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] sfxSounds;
     #endregion
 
-    [HideInInspector]
-    public bool firstMusicSourceIsPlaying;
+    [HideInInspector] public bool firstMusicSourceIsPlaying;
 
     private void Awake()
     {
@@ -51,7 +50,7 @@ public class AudioManager : MonoBehaviour
 
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource2 = gameObject.AddComponent<AudioSource>();
-        sfxSource = gameObject.GetComponent<AudioSource>();
+        sfxSource = gameObject.AddComponent<AudioSource>();
 
     }
 

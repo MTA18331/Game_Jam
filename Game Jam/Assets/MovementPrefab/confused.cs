@@ -28,12 +28,12 @@ public class confused : MonoBehaviour
         PlayerMovement player = GetComponentInParent<PlayerMovement>();
       
         player.confused = true;
-       
-        
+
+        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[0]);
         yield return new WaitForSeconds(3);
         player.confused = false;
        
-       gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
 
