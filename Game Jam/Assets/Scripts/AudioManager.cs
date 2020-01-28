@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public AudioSource musicSource;
     [HideInInspector] public AudioSource musicSource2;
     [HideInInspector] public AudioSource sfxSource;
+    [HideInInspector] public AudioSource sfxSource2;
     #endregion
     
     #region Ambient audio clips
@@ -51,6 +52,7 @@ public class AudioManager : MonoBehaviour
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource2 = gameObject.AddComponent<AudioSource>();
         sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource2 = gameObject.AddComponent<AudioSource>();
 
     }
 
@@ -87,6 +89,13 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(UpdateMusicWithCrossFade(activeSource, newSource, transitionTime));
     }
 
+    public void PauseMusic()
+    {
+        AudioSource activeSource = musicSource.isPlaying ? musicSource : musicSource2;
+
+        activeSource.Pause();
+    }
+
     public void PauseMusic(float waitTime)
     {
         AudioSource activeSource = musicSource.isPlaying ? musicSource : musicSource2;
@@ -100,6 +109,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlaySFXExtra(AudioClip clip)
+    {
+        sfxSource2.PlayOneShot(clip);
     }
 
     public void PlaySFX(AudioClip clip, float volume)
@@ -117,6 +131,11 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         sfxSource.volume = volume;
+    }
+
+    public void SetPitch(float pitch, AudioSource audioSource)
+    {
+        audioSource.pitch = pitch;
     }
 
     // Method: fades out the current audio clip and fades in a new. 

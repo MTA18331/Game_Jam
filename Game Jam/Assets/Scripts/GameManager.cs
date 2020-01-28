@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         gameManager = this;
     }
 
-    #region Audio Properties
+    #region Music Properties
     [SerializeField] private float transmissionTime;
     private float t = 0.0f; // Keeps track of time
     #endregion
@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
         AudioManager.audioManager.PlayMusic(AudioManager.audioManager.ambientSounds[0]);
         AudioManager.audioManager.musicSource2.clip = AudioManager.audioManager.ambientSounds[1];
         t = Time.time;
+
+        
     }
 
     private void Update()
@@ -54,7 +56,6 @@ public class GameManager : MonoBehaviour
             AudioManager.audioManager.PlayMusicWithCrossFade(AudioManager.audioManager.ambientSounds[0], transmissionTime);
             t = Time.time;
         }
-        
 
     }
 
