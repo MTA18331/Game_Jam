@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class church : MonoBehaviour
 {
-    public  GameObject cam1;
+    public  GameObject mainCam;
    // public GameObject cam2;
-    public GameObject cam3;
-    public GameObject cam4;
+    public GameObject situation;
+    public GameObject sitauationCam;
     public GameObject P1UI;
    // public GameObject P2UI;
     public GameObject fader;
-    public GameObject Endcanvas;
-    public Text p1score;
+  //  public GameObject Endcanvas;
+    //public Text p1score;
    // public Text p2score;
-    public GameObject Crespawn;
+    public GameObject Sitrespawn;
     // Start is called before the first frame update
 
     void Start()
@@ -40,13 +40,13 @@ public class church : MonoBehaviour
 
     IEnumerator churchScene()
     {
-       
-       // yield return new WaitForSeconds(5);
-        cam4.gameObject.SetActive(true);
-        cam3.gameObject.SetActive(true);
-        cam1.gameObject.SetActive(false);
-       // cam2.gameObject.SetActive(false);
-        cam4.gameObject.SetActive(true);
+
+        // yield return new WaitForSeconds(5);
+        sitauationCam.gameObject.SetActive(true);
+        situation.gameObject.SetActive(true);
+        mainCam.gameObject.SetActive(false);
+        // cam2.gameObject.SetActive(false);
+        sitauationCam.gameObject.SetActive(true);
         P1UI.gameObject.SetActive(false);
        // P2UI.gameObject.SetActive(false);
         AudioManager.audioManager.PauseMusic(AudioManager.audioManager.sfxSounds[1].length + 0.5f);
@@ -59,11 +59,11 @@ public class church : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         GameObject player = GameObject.FindGameObjectWithTag("player");
-        player.transform.position = Crespawn.transform.position;
-        cam1.gameObject.SetActive(true);
+        player.transform.position = Sitrespawn.transform.position;
+        mainCam.gameObject.SetActive(true);
         P1UI.gameObject.SetActive(true);
-        cam3.gameObject.SetActive(false);
-        cam4.gameObject.SetActive(false);
+        sitauationCam.gameObject.SetActive(false);
+        situation.gameObject.SetActive(false);
         fader.SetActive(false);
 
         //buildend();
@@ -71,7 +71,7 @@ public class church : MonoBehaviour
 
     void buildend()
     {
-        Text wintext = Endcanvas.gameObject.transform.GetChild(1).GetComponent<Text>();
+     /*   Text wintext = Endcanvas.gameObject.transform.GetChild(1).GetComponent<Text>();
         Text p1 = Endcanvas.gameObject.transform.GetChild(2).GetComponent<Text>();
         Text p2 = Endcanvas.gameObject.transform.GetChild(3).GetComponent<Text>();
         Debug.Log(p1score.text);
@@ -97,7 +97,7 @@ public class church : MonoBehaviour
         }
 
     */
-        Endcanvas.SetActive(true);
+       // Endcanvas.SetActive(true);
 
 
 
