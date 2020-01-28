@@ -1,11 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< HEAD
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-=======
->>>>>>> 243a9e7bde6dc5131031c999cf2207c45639802d
 
 public class church : MonoBehaviour
 {
@@ -15,13 +10,6 @@ public class church : MonoBehaviour
     public GameObject cam4;
     public GameObject P1UI;
     public GameObject P2UI;
-<<<<<<< HEAD
-    public GameObject fader;
-    public GameObject Endcanvas;
-    public Text p1score;
-    public Text p2score;
-=======
->>>>>>> 243a9e7bde6dc5131031c999cf2207c45639802d
     // Start is called before the first frame update
 
     void Start()
@@ -55,38 +43,7 @@ public class church : MonoBehaviour
         cam4.gameObject.SetActive(true);
         P1UI.gameObject.SetActive(false);
         P2UI.gameObject.SetActive(false);
-        
-<<<<<<< HEAD
-        fader.SetActive(true);
-        yield return new WaitForSeconds(2);
-        buildend();
-       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    void buildend()
-    {
-        Text wintext = Endcanvas.gameObject.transform.GetChild(1).GetComponent<Text>();
-        Text p1 = Endcanvas.gameObject.transform.GetChild(2).GetComponent<Text>();
-        Text p2 = Endcanvas.gameObject.transform.GetChild(3).GetComponent<Text>();
-        p1.text = "Player 1: " + p1score.text;
-        p2.text = "Player 2: " + p2score.text;
-
-
-        int p1scoreint = int.Parse(p1score.text);
-        int p2scoreint = int.Parse(p2score.text);
-        if (p1scoreint > p2scoreint)
-        {
-            wintext.text = "Player 1 wins!";
-        }
-        else
-        {
-            wintext.text = "Player 2 wins!";
-        }
-
-     
-        Endcanvas.SetActive(true);
-
-=======
->>>>>>> 243a9e7bde6dc5131031c999cf2207c45639802d
+        AudioManager.audioManager.PauseMusic(AudioManager.audioManager.sfxSounds[1].length + 0.5f);
+        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[1]);
     }
 }

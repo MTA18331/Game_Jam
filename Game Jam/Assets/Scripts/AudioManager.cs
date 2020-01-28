@@ -89,7 +89,7 @@ public class AudioManager : MonoBehaviour
 
     public void PauseMusic(float waitTime)
     {
-        AudioSource activeSource = (musicSource.isPlaying) ? musicSource : musicSource2;
+        AudioSource activeSource = musicSource.isPlaying ? musicSource : musicSource2;
 
         activeSource.Pause();
         StartCoroutine(PauseMusic(activeSource, waitTime));
