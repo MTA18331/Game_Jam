@@ -43,7 +43,6 @@ public class church : MonoBehaviour
         cam4.gameObject.SetActive(true);
         P1UI.gameObject.SetActive(false);
         P2UI.gameObject.SetActive(false);
-        AudioManager.audioManager.PauseMusic(AudioManager.audioManager.sfxSounds[1].length+0.5f);
-        AudioManager.audioManager.PlaySFX(AudioManager.audioManager.sfxSounds[1]);
+        
     }
 }
