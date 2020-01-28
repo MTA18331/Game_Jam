@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
-    public Rigidbody2D rb;
+     Rigidbody2D rb;
     Vector2 Movement;
-    public Animator animator;
-    public GameObject canvas;
+     Animator animator;
+    public GameObject interactText;
     public int points;
     public GameObject score;
-    public situation CurrentSit;
+     situation CurrentSit;
     Text option1;
     Text option2;
     Text option3;
@@ -28,18 +28,11 @@ public class PlayerMovement : MonoBehaviour
     public Boolean confused = false;
     void Start()
     {
-        score = gameObject.transform.GetChild(1).GetChild(0).gameObject;
-        canvas = gameObject.transform.GetChild(0).gameObject;
+
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         scoretext = score.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
-        try
-        {
-            animator = GetComponent<Animator>();
-        }
-        catch (Exception e)
-        {
-            print("no animator yet");
-        }
+       
         int k = 0;
         for (int i = 2; i < score.gameObject.transform.childCount; i++)
         {
@@ -73,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(one))
             {
-                canvas.gameObject.transform.gameObject.SetActive(false);
+                interactText.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option1points;
                 canInteract = false;
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -91,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(two))
             {
 
-                canvas.gameObject.transform.gameObject.SetActive(false);
+                interactText.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option2points;
                 canInteract = false;
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -110,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(three))
             {
 
-                canvas.gameObject.transform.gameObject.SetActive(false);
+                interactText.gameObject.transform.gameObject.SetActive(false);
                 points += CurrentSit.option3points;
                 canInteract = false;
                 Text flyingText = score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -157,8 +150,8 @@ public class PlayerMovement : MonoBehaviour
           
             sortOutSit();
         }
-      
-       canvas.gameObject.transform.gameObject.SetActive(true);
+
+        interactText.gameObject.transform.gameObject.SetActive(true);
         canInteract = true; 
 
     }
@@ -167,8 +160,8 @@ public class PlayerMovement : MonoBehaviour
     {
 
         {
-            
-            canvas.gameObject.transform.gameObject.SetActive(false);
+
+            interactText.gameObject.transform.gameObject.SetActive(false);
             canInteract = false;
 
         }
@@ -197,17 +190,15 @@ public class PlayerMovement : MonoBehaviour
         }
         
 
-        option1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        option2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
-        option3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+        option1 = interactText.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        option2 = interactText.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
+        option3 = interactText.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
         option1.text = randomize(r1);
 
         option2.text = randomize(r2);
 
         option3.text = randomize(r3);
-        Debug.Log(option1.text);
-        Debug.Log(option2.text);
-        Debug.Log(option3.text);
+       
     }
 
     String randomize(int i)
@@ -233,9 +224,9 @@ public class PlayerMovement : MonoBehaviour
     void sortOutSit()
     {
 
-        option1 = canvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        option2 = canvas.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
-        option3 = canvas.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+        option1 = interactText.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        option2 = interactText.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
+        option3 = interactText.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
 
         option1.text = CurrentSit.option1;
 
