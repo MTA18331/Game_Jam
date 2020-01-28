@@ -87,6 +87,15 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(UpdateMusicWithCrossFade(activeSource, newSource, transitionTime));
     }
 
+    public void PauseMusic(float waitTime)
+    {
+        AudioSource activeSource = (musicSource.isPlaying) ? musicSource : musicSource2;
+
+        activeSource.Pause();
+        StartCoroutine(PauseMusic(activeSource, waitTime));
+         
+    }
+
     #region PlaySFX Methods
     public void PlaySFX(AudioClip clip)
     {
@@ -154,6 +163,11 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    private IEnumerator PauseMusic(AudioSource activeSource, float waitTime = 1.0f)
+    {
+        yield return new WaitForSeconds(waitTime);
+        activeSource.UnPause();
+    }
 
 
 }
