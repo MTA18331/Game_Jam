@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/start.unity
+    guid: 498a8ba91692524468cb578c00fd0ca1
+  - enabled: 1
+    path: Assets/Scenes/Movement_updated.unity
+    guid: a6b8e46a45e551b439b6418a2f4e8ef8
   m_configObjects: {}
