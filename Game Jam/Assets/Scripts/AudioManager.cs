@@ -105,6 +105,12 @@ public class AudioManager : MonoBehaviour
          
     }
 
+    public void UnPauseMusic()
+    {
+        AudioSource activeSource = musicSource.isPlaying ? musicSource2 : musicSource;
+        activeSource.UnPause();
+    }
+
     #region PlaySFX Methods
     public void PlaySFX(AudioClip clip)
     {
